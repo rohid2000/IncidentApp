@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using IncidentApp.Fetcher.Fetchers;
+using Microsoft.Extensions.Logging;
 
 namespace IncidentApp;
 
@@ -19,6 +20,7 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 		builder.Services.AddSingleton<HttpClient>();
+		builder.Services.AddSingleton<ApiService>();
 
 		return builder.Build();
 	}
