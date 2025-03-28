@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IncidentApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Json;
@@ -17,18 +18,23 @@ namespace IncidentApp.Fetcher.Fetchers
             _httpClient.BaseAddress = new Uri("https://localhost:7015");
         }
 
-        public async Task<List<DataModel>> GetDataAsync()
+        public async Task<List<IncidentDataModel>> GetIncidentAsync()
         {
-            var response = await _httpClient.GetAsync(" api/data");
+            var response = await _httpClient.GetAsync("api/Incident");
             response.EnsureSuccessStatusCode();
 
-            return await response.Content.ReadFromJsonAsync<List<DataModel>>();
+            return await response.Content.ReadFromJsonAsync<List<IncidentDataModel>>();
         }
 
-        public async Task PostDataAsync(DataModel data)
+        public async Task AddIncidentAsync(IncidentDataModel incident)
         {
-            var response = await _httpClient.PostAsync("/api/data", data);
+            var response = await _httpClient.PostAsJsonAsync("/api/Incident", incident);
+            response.EnsureSuccessStatusCode();
+        }
 
+        public async Task RemoveIncidentAsync(IncidentDataModel incident)
+        {
+            var response = await _httpClient.DeleteAsync("/api/Incident/{id}");  
             response.EnsureSuccessStatusCode();
         }
     }
