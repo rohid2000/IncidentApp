@@ -34,7 +34,7 @@ namespace IncidentApp.Fetcher.Fetchers
 
         public async Task RemoveIncidentAsync(IncidentDataModel incident)
         {
-            var response = await _httpClient.DeleteAsync("/api/Incident/{id}");  
+            var response = await _httpClient.DeleteAsync($"/api/Incident/{incident.id}");  
             response.EnsureSuccessStatusCode();
         }
     }
