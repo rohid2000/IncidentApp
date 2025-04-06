@@ -14,7 +14,7 @@
             <!-- Description Field -->
             <VerticalStackLayout Spacing="5">
                 <Label Text="Beschrijving Incident:" FontAttributes="Bold"/>
-                <Entry x:Description="DescriptionEntry" 
+                <Entry x:Name="DescriptionEntry" 
                        Placeholder="Voer de beschrijving van het Incident in"
                        Text="{Binding Description}"/>
             </VerticalStackLayout>
