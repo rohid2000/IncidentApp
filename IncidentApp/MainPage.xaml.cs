@@ -1,4 +1,6 @@
-﻿namespace IncidentApp
+﻿using System.Threading.Tasks;
+
+namespace IncidentApp
 {
     public partial class MainPage : ContentPage
     {
@@ -19,6 +21,11 @@
                 CounterBtn.Text = $"Clicked {count} times";
 
             SemanticScreenReader.Announce(CounterBtn.Text);
+        }
+
+        private async Task OnReportIncidentClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("//reportIncident");
         }
     }
 
