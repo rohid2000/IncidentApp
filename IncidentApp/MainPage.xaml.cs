@@ -23,10 +23,9 @@ namespace IncidentApp
             SemanticScreenReader.Announce(CounterBtn.Text);
         }
 
-        private async Task OnReportIncidentClicked(object sender, EventArgs e)
+        private void OnReportIncidentClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//reportIncident");
+            Shell.Current.GoToAsync("//reportIncidentPage");
         }
     }
-
 }

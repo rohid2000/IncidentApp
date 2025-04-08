@@ -18,5 +18,4 @@
         ContentTemplate="{DataTemplate local:ReportIncidentPage}"
         Route="ReportIncidentPage"
     />
-
 </Shell>

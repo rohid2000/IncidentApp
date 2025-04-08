@@ -26,13 +26,14 @@
 
             <Button
                 x:Name="CounterBtn"
-                Text="Meld een incident" 
+                Text="Click here!" 
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Fill" />
 
             <Button
-                Text="Report Incident"
+                x:Name="ReportIncidentBtn"
+                Text="Incident melden"
                 Clicked="OnReportIncidentClicked"
                 HorizontalOptions="Fill"
             />

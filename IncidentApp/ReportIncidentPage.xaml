@@ -20,54 +20,48 @@
             </VerticalStackLayout>
 
             <!-- Email Field -->
-            <VerticalStackLayout Spacing="5">
+            <!--<VerticalStackLayout Spacing="5">
                 <Label Text="Email:" FontAttributes="Bold"/>
                 <Entry x:Name="EmailEntry" 
                        Placeholder="Enter your email"
                        Keyboard="Email"
                        Text="{Binding Email}"/>
-            </VerticalStackLayout>
+            </VerticalStackLayout>-->
 
             <!-- Rating Picker -->
-            <VerticalStackLayout Spacing="5">
+            <!--<VerticalStackLayout Spacing="5">
                 <Label Text="Rating:" FontAttributes="Bold"/>
                 <Picker x:Name="RatingPicker"
                         Title="Select a rating"
                         ItemsSource="{Binding RatingOptions}"
                         ItemDisplayBinding="{Binding .}"/>
-            </VerticalStackLayout>
+            </VerticalStackLayout>-->
 
             <!-- Feedback Editor -->
-            <VerticalStackLayout Spacing="5">
+            <!--<VerticalStackLayout Spacing="5">
                 <Label Text="Your Feedback:" FontAttributes="Bold"/>
                 <Editor x:Name="FeedbackEditor" 
                         Placeholder="Enter your feedback here..."
                         AutoSize="TextChanges"
                         HeightRequest="120"
                         Text="{Binding Feedback}"/>
-            </VerticalStackLayout>
+            </VerticalStackLayout>-->
 
             <!-- Terms Checkbox -->
-            <HorizontalStackLayout Spacing="10">
+            <!--<HorizontalStackLayout Spacing="10">
                 <CheckBox x:Name="TermsCheckbox"
                          IsChecked="{Binding AcceptTerms}"/>
                 <Label Text="I agree to the terms and conditions"
                        VerticalOptions="Center"/>
-            </HorizontalStackLayout>
+            </HorizontalStackLayout>-->
 
             <!-- Submit Button -->
-            <Button Text="Submit Feedback"
+            <!--<Button Text="Submit Feedback"
                     Clicked="OnSubmitClicked"
                     BackgroundColor="{StaticResource Primary}"
                     TextColor="White"
                     HorizontalOptions="Center"
-                    WidthRequest="200"/>
-
-            <!-- Back Button -->
-            <Button Text="Back to Main"
-                    Clicked="OnBackClicked"
-                    HorizontalOptions="Center"
-                    WidthRequest="200"/>
+                    WidthRequest="200"/>-->
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
