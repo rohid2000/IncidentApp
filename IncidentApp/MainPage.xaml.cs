@@ -11,21 +11,16 @@ namespace IncidentApp
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        private void OnReportIncidentClicked(object sender, EventArgs e)
         {
             count++;
 
             if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+            {
+                ReportIncidentBtn.Text = "Incident gemeldt!";
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
-        }
-
-        private void OnReportIncidentClicked(object sender, EventArgs e)
-        {
-            Shell.Current.GoToAsync("//reportIncidentPage");
+                SemanticScreenReader.Announce(ReportIncidentBtn.Text);
+            }
         }
     }
 }
