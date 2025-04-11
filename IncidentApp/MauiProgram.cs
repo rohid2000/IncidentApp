@@ -22,6 +22,8 @@ public static class MauiProgram
 		builder.Services.AddSingleton<HttpClient>();
 		builder.Services.AddSingleton<ApiService>();
 
+		//builder.Services.AddSingleton<MainPage>();
+
 		return builder.Build();
 	}
 }

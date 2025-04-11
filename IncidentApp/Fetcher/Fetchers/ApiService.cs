@@ -23,7 +23,9 @@ namespace IncidentApp.Fetcher.Fetchers
             var response = await _httpClient.GetAsync("api/Incident");
             response.EnsureSuccessStatusCode();
 
-            return await response.Content.ReadFromJsonAsync<List<IncidentDataModel>>();
+            var result = await response.Content.ReadFromJsonAsync<List<IncidentDataModel>>();
+
+            return result;
         }
 
         public async Task AddIncidentAsync(IncidentDataModel incident)

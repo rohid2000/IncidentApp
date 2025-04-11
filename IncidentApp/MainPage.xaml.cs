@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using IncidentApp.Fetcher.Fetchers;
+using IncidentApp.Models;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace IncidentApp
 {
@@ -21,6 +24,18 @@ namespace IncidentApp
 
                 SemanticScreenReader.Announce(ReportIncidentBtn.Text);
             }
+        }
+
+        private async void AddReportedIncident(object sender, EventArgs e)
+        {
+            var data = new IncidentDataModel
+            {
+                Description = "test",
+            };
+
+            var apiService = new ApiService();
+
+            await apiService.AddIncidentAsync(data);
         }
     }
 }
