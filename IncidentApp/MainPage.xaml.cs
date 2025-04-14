@@ -33,9 +33,7 @@ namespace IncidentApp
                 Description = "test",
             };
 
-            var apiService = new ApiService();
-
-            await apiService.AddIncidentAsync(data);
+            await ApiService.AddIncidentAsync(data);
         }
     }
 }
