@@ -12,9 +12,8 @@ namespace IncidentApp.Fetcher.Fetchers
     {
         private static readonly HttpClient _httpClient;
 
-        public static ApiService(HttpClient httpClient)
+        static ApiService()
         {
-            _httpClient = httpClient;
             _httpClient.BaseAddress = new Uri("https://localhost:7015");
         }
 
