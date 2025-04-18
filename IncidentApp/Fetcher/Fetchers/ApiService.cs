@@ -31,6 +31,12 @@ namespace IncidentApp.Fetcher.Fetchers
         {
             var response = await _httpClient.PostAsJsonAsync("/api/Incident", incident);
             response.EnsureSuccessStatusCode();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new Exception($"API Error: {response.StatusCode} - {errorContent}");
+            }
         }
 
         public async Task RemoveIncidentAsync(IncidentDataModel incident)

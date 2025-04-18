@@ -23,7 +23,7 @@
             <Button
                 x:Name="ReportIncidentBtn"
                 Text="Incident melden"
-                Clicked="OnReportIncidentClicked"
+                Clicked="AddReportedIncident"
                 HorizontalOptions="Fill"
             />
         </VerticalStackLayout>

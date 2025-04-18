@@ -17,18 +17,6 @@ namespace IncidentApp
             _apiService = apiService;
         }
 
-        private void OnReportIncidentClicked(object sender, EventArgs e)
-        {
-            count++;
-
-            if (count == 1)
-            {
-                ReportIncidentBtn.Text = "Incident gemeldt!";
-
-                SemanticScreenReader.Announce(ReportIncidentBtn.Text);
-            }
-        }
-
         private async void AddReportedIncident(object sender, EventArgs e)
         {
             var incident = new IncidentDataModel
@@ -36,7 +24,18 @@ namespace IncidentApp
                 Description = DescriptionEntry.Text
             };
 
-            await _apiService.AddIncidentAsync(incident);
+            try
+            {
+                await _apiService.AddIncidentAsync(incident);
+
+                DescriptionEntry.Text = string.Empty;
+
+                await DisplayAlert("Success", "Incident saved!", "OK");
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"Failed to save: {ex.Message}", "OK");
+            }
         }
     }
 }
