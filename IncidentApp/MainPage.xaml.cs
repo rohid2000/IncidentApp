@@ -7,11 +7,14 @@ namespace IncidentApp
 {
     public partial class MainPage : ContentPage
     {
+        private readonly ApiService _apiService;
+
         int count = 0;
 
-        public MainPage()
+        public MainPage(ApiService apiService)
         {
             InitializeComponent();
+            _apiService = apiService;
         }
 
         private void OnReportIncidentClicked(object sender, EventArgs e)
@@ -28,12 +31,12 @@ namespace IncidentApp
 
         private async void AddReportedIncident(object sender, EventArgs e)
         {
-            var data = new IncidentDataModel
+            var incident = new IncidentDataModel
             {
                 Description = "test",
             };
 
-            await ApiService.AddIncidentAsync(data);
+            await _apiService.AddIncidentAsync(incident);
         }
     }
 }
