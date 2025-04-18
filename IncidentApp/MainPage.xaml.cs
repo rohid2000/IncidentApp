@@ -33,7 +33,7 @@ namespace IncidentApp
         {
             var incident = new IncidentDataModel
             {
-                Description = "test",
+                Description = DescriptionEntry.Text
             };
 
             await _apiService.AddIncidentAsync(incident);
