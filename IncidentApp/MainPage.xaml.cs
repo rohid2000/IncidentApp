@@ -7,14 +7,10 @@ namespace IncidentApp
 {
     public partial class MainPage : ContentPage
     {
-        private readonly ApiService _apiService;
 
-        int count = 0;
-
-        public MainPage(ApiService apiService)
+        public MainPage()
         {
             InitializeComponent();
-            _apiService = apiService;
         }
 
         private async void AddReportedIncident(object sender, EventArgs e)
@@ -26,7 +22,7 @@ namespace IncidentApp
 
             try
             {
-                await _apiService.AddIncidentAsync(incident);
+                await ApiService.AddIncidentAsync(incident);
 
                 DescriptionEntry.Text = string.Empty;
 

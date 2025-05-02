@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace IncidentApp.Fetcher.Fetchers
 {
-    public class ApiService
+    public static class ApiService
     {
-        private readonly HttpClient _httpClient;
+        private static readonly HttpClient _httpClient;
 
-        ApiService()
+        static ApiService()
         {
             _httpClient.BaseAddress = new Uri("https://localhost:7015");
         }
 
-        public async Task<List<IncidentDataModel>> GetIncidentAsync()
+        public static async Task<List<IncidentDataModel>> GetIncidentAsync()
         {
             var response = await _httpClient.GetAsync("api/Incident");
             response.EnsureSuccessStatusCode();
@@ -27,7 +27,7 @@ namespace IncidentApp.Fetcher.Fetchers
             return result;
         }
 
-        public async Task AddIncidentAsync(IncidentDataModel incident)
+        public static async Task AddIncidentAsync(IncidentDataModel incident)
         {
             var response = await _httpClient.PostAsJsonAsync("/api/Incident", incident);
             response.EnsureSuccessStatusCode();
@@ -39,7 +39,7 @@ namespace IncidentApp.Fetcher.Fetchers
             }
         }
 
-        public async Task RemoveIncidentAsync(IncidentDataModel incident)
+        public static async Task RemoveIncidentAsync(IncidentDataModel incident)
         {
             var response = await _httpClient.DeleteAsync($"/api/Incident/{incident.Id}");
             response.EnsureSuccessStatusCode();
