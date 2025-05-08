@@ -10,7 +10,7 @@ namespace IncidentApp.Fetcher.Fetchers
 {
     public static class ApiService
     {
-        private static readonly HttpClient _httpClient;
+        private static readonly HttpClient _httpClient = new HttpClient();
 
         static ApiService()
         {
