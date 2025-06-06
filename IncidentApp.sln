@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35825.156 d17.13
+VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncidentApp", "IncidentApp\IncidentApp.csproj", "{22D124C6-785F-4ED7-A875-D4B4DE744A04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncidentManagementWebApp", "IncidentManagementWebApp\IncidentManagementWebApp.csproj", "{2DEC47F7-DE0D-4E2B-8125-38C5E5F6AE3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{22D124C6-785F-4ED7-A875-D4B4DE744A04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22D124C6-785F-4ED7-A875-D4B4DE744A04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22D124C6-785F-4ED7-A875-D4B4DE744A04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DEC47F7-DE0D-4E2B-8125-38C5E5F6AE3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DEC47F7-DE0D-4E2B-8125-38C5E5F6AE3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DEC47F7-DE0D-4E2B-8125-38C5E5F6AE3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DEC47F7-DE0D-4E2B-8125-38C5E5F6AE3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
