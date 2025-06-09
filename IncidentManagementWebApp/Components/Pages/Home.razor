@@ -1,23 +1,55 @@
-﻿@page "/"
+﻿@page "/login"
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
 
-<PageTitle>Home</PageTitle>
+<h3>Login</h3>
 
-<h1>Hello There!</h1>
+<form method="post" @onsubmit="HandleValidSubmit" @formname="login-form">
+    <AntiforgeryToken />
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <InputText @bind-Value="Model!.Username" typeof="text" required/>
+    </div>
 
-Welcome to the Incident Management App! Please login to gain access to your acount!
-<br />
-<br />
-<input type="text" name="username" />
-<br />
-<br />
-<input type="password" name="password" />
-<br />
-<br />
-<button class="btn btn-primary" @onclick="Login">Login</button>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <InputText @bind-Value="Model!.Password" typeof="password" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Login</button>
+</form>
 
 @code {
-    private void Login()
+    [SupplyParameterFromForm]
+    private LoginModel? Model { get; set; } = new();
+
+    private async Task HandleValidSubmit()
     {
-        
+
+        try
+        {
+            // Call your API endpoint
+            var response = await Http.PostAsJsonAsync("https://localhost:7015/api/login",new { Username = Model.Username, Password = Model.Password } );
+
+            if (response.IsSuccessStatusCode)
+            {
+                // Handle successful login (e.g., store token, redirect)
+                NavigationManager.NavigateTo("/");
+            }
+            else
+            {
+                Console.WriteLine("Login failed. Please check your credentials.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+
+    public class LoginModel
+    {
+        public string Username { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
     }
 }

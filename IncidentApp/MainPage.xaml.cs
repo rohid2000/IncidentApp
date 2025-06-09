@@ -15,9 +15,12 @@ namespace IncidentApp
 
         private async void AddReportedIncident(object sender, EventArgs e)
         {
+            Location location = await LocationFetcher.GetCurrentLocation();
+
             var incident = new IncidentDataModel
             {
-                Description = DescriptionEntry.Text
+                Description = DescriptionEntry.Text,
+                Location = $"{location.Latitude} {location.Longitude}"
             };
 
             try
