@@ -1,5 +1,6 @@
 using IncidentManagementWebApp;
 using IncidentManagementWebApp.Components;
+using IncidentManagementWebApp.Components.Pages;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 
@@ -10,6 +11,9 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddHttpClient();
+
+builder.Services.AddScoped<UserStateService>();
+
 
 var app = builder.Build();
 

@@ -1,6 +1,7 @@
-﻿@page "/login"
+﻿@page "/"
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
+@inject UserStateService UserStateService
 
 <h3>Login</h3>
 
@@ -8,12 +9,14 @@
     <AntiforgeryToken />
     <div class="form-group">
         <label for="username">Username:</label>
-        <InputText @bind-Value="Model!.Username" typeof="text" required/>
+        <br />
+        <InputText @bind-Value="Model!.Username" type="text" required/>
     </div>
 
     <div class="form-group">
         <label for="password">Password:</label>
-        <InputText @bind-Value="Model!.Password" typeof="password" required />
+        <br />
+        <InputText @bind-Value="Model!.Password" type="password" required />
     </div>
 
     <button type="submit" class="btn btn-primary mt-3">Login</button>
@@ -25,16 +28,27 @@
 
     private async Task HandleValidSubmit()
     {
-
         try
         {
             // Call your API endpoint
-            var response = await Http.PostAsJsonAsync("https://localhost:7015/api/login",new { Username = Model.Username, Password = Model.Password } );
+            var response = await Http.PostAsJsonAsync("https://localhost:7015/api/login", Model);
 
             if (response.IsSuccessStatusCode)
             {
                 // Handle successful login (e.g., store token, redirect)
-                NavigationManager.NavigateTo("/");
+
+                IUser currentUser = await response.Content.ReadFromJsonAsync<IUser>();
+
+                UserStateService.currentUser = currentUser;
+
+                if (currentUser.isAdmin)
+                {
+                    NavigationManager.NavigateTo("/management");
+                }
+                else
+                {
+                    NavigationManager.NavigateTo("/userlogin");
+                }
             }
             else
             {

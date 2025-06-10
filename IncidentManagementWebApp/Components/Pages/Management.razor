@@ -1,0 +1,70 @@
+﻿@page "/management"
+@inject HttpClient Http
+@inject UserStateService UserStateService
+
+
+<h3>Manage the reported Incidents</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Priority</th>
+            <th>Username</th>
+            <th>Location</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(IIncident incident in Incidents)
+        {
+            <tr>
+                <td>@incident.Description</td>
+                <td>@incident.Status</td>
+                <td>@incident.Priority</td>
+                <td>@incident.Username</td>
+                <td>@incident.Location</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    string currentUser;
+    IIncident[] Incidents;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUser = UserStateService.currentUser.username;
+
+        await GetAllReportedIncidents();
+
+        await base.OnInitializedAsync();
+    }
+
+    private async Task GetAllReportedIncidents()
+    {
+        try
+        {
+            // Call your API endpoint
+            var response = await Http.PostAsJsonAsync("https://localhost:7015/api/incident", new { username = currentUser });
+
+            if (response.IsSuccessStatusCode)
+            {
+                // Handle successful login (e.g., store token, redirect)
+
+                IIncident[] incidents = await response.Content.ReadFromJsonAsync<IIncident[]>();
+
+                this.Incidents = incidents;
+            }
+            else
+            {
+                Console.WriteLine("Couldn't fetch Incidents");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+}
