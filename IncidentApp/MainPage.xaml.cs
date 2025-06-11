@@ -36,5 +36,10 @@ namespace IncidentApp
                 await DisplayAlert("Error", $"Failed to save: {ex.Message}", "OK");
             }
         }
+
+        private async void AddUser(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

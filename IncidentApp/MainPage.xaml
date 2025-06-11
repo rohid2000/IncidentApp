@@ -26,6 +26,17 @@
                 Clicked="AddReportedIncident"
                 HorizontalOptions="Fill"
             />
+
+            <Label 
+                Text="Wilt u de Status bijhouden van het door u gemelde Incident? Registreer u dan eerst, voordat u een Incident meldt!"
+            />
+
+            <Button
+                x:Name="AddUserButton"
+                Text="Registeren"
+                Clicked="AddUser"
+                HorizontalOptions="Fill"
+            />
         </VerticalStackLayout>
     </ScrollView>
 
