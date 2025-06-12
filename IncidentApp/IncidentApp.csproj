@@ -60,12 +60,25 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Fetcher\Fetchers\NewFile1.txt" />
+	  <None Remove="Fetchers\NewFile1.txt" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.60" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="9.0.6" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.71" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.6" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Pages\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\RegisterPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\UserReportedIncidentsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

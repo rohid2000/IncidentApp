@@ -1,5 +1,5 @@
-﻿using IncidentApp.Fetcher.Fetchers;
-using IncidentApp.Models;
+﻿using IncidentApp.Models;
+using IncidentApp.Services;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -37,9 +37,14 @@ namespace IncidentApp
             }
         }
 
-        private async void AddUser(object sender, EventArgs e)
+        private async void NavigateToRegisterPage(object sender, EventArgs e)
         {
-            
+            await Navigation.PushAsync(new RegisterPage());
+        }
+
+        private async void NavigateToLoginPage(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new LoginPage());
         }
     }
 }

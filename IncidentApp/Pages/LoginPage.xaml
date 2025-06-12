@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IncidentApp.LoginPage"
+             Title="LoginPage">
+    <VerticalStackLayout>
+        <Label 
+            Text="Login in om de door u gemelde Incidenten te kunnen inzien"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <!-- Username Field -->
+        <VerticalStackLayout Spacing="5">
+            <Label Text="Username:" FontAttributes="Bold"/>
+            <Entry x:Name="UsernameEntry" 
+        Placeholder="Voer uw gebruikersnaam in"
+        Text="{Binding Username}"/>
+        </VerticalStackLayout>
+
+        <!-- Password Field -->
+        <VerticalStackLayout Spacing="5">
+            <Label Text="Password:" FontAttributes="Bold"/>
+            <Entry IsPassword="True" x:Name="PasswordEntry" 
+        Placeholder="Voer uw wachtwoord in"
+        Text="{Binding Username}"/>
+        </VerticalStackLayout>
+
+        <Button
+            x:Name="AddUserBtn"
+            Text="Login"
+            Clicked="Login"
+            HorizontalOptions="Fill"
+        />
+    </VerticalStackLayout>
+</ContentPage>

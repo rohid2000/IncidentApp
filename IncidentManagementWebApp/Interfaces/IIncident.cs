@@ -1,4 +1,4 @@
-﻿namespace IncidentManagementWebApp
+﻿namespace IncidentManagementWebApp.Interfaces
 {
     public class IIncident
     {

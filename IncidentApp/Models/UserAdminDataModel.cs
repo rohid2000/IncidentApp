@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace IncidentApp.Models
 {
-    public class UserDataModel
+    public class UserAdminDataModel
     {
-        public int Id { get; set; }
         public string Username { get; set; }
-        public byte[] Password { get; set; }
-        public bool isAdmin { get; set; } = false;
+        public string Password { get; set; }
     }
 }

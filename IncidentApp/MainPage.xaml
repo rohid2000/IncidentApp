@@ -16,8 +16,8 @@
             <VerticalStackLayout Spacing="5">
                 <Label Text="Incident:" FontAttributes="Bold"/>
                 <Entry x:Name="DescriptionEntry" 
-           Placeholder="Voer de beschrijving van het Incident in"
-           Text="{Binding Description}"/>
+                   Placeholder="Voer de beschrijving van het Incident in"
+                   Text="{Binding Description}"/>   
             </VerticalStackLayout>
 
             <Button
@@ -32,11 +32,23 @@
             />
 
             <Button
-                x:Name="AddUserButton"
-                Text="Registeren"
-                Clicked="AddUser"
+                x:Name="NavigateToRegisterPageBtn"
+                Text="Ga naar registeer een account"
+                Clicked="NavigateToRegisterPage"
                 HorizontalOptions="Fill"
             />
+
+            <Label 
+                Text="Heeft u al een account?"
+            />
+            
+            <Button
+                x:Name="NavigateToLoginPageBtn"
+                Text="Login"
+                Clicked="NavigateToLoginPage"
+                HorizontalOptions="Fill"
+            />
+            
         </VerticalStackLayout>
     </ScrollView>
 

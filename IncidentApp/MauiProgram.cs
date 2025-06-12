@@ -1,5 +1,4 @@
-﻿using IncidentApp.Fetcher.Fetchers;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 
 namespace IncidentApp;
 

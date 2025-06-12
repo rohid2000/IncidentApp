@@ -1,4 +1,6 @@
-﻿namespace IncidentManagementWebApp
+﻿using IncidentManagementWebApp.Interfaces;
+
+namespace IncidentManagementWebApp.Services
 {
     public class UserStateService
     {
