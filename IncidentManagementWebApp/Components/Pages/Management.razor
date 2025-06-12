@@ -17,20 +17,38 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(IIncident incident in Incidents)
+        @if (!this.isLoading)
         {
-            <tr>
-                <td>@incident.Description</td>
-                <td>@incident.Status</td>
-                <td>@incident.Priority</td>
-                <td>@incident.Username</td>
-                <td>@incident.Location</td>
-            </tr>
+            @foreach (IIncident incident in Incidents)
+            {
+                <tr>
+                    <td>@incident.Description</td>
+                    <td>@incident.Status
+                        <select>
+                            <option value=""></option>
+                            <option value="registered">Geregistreerd</option>
+                            <option value="pending">In behandeling</option>
+                            <option value="completed">Afgehandeld</option>
+                        </select>
+                    </td>
+                    <td>@incident.Priority
+                        <select>
+                            <option value=""></option>
+                            <option value="High">Hoog</option>
+                            <option value="Normal">Normaal</option>
+                            <option value="Low">Laag</option>
+                        </select>
+                    </td>
+                    <td>@incident.Username</td>
+                    <td>@incident.Location</td>
+                </tr>
+            }
         }
     </tbody>
 </table>
 
 @code {
+    bool isLoading = true;
     string currentUser;
     IIncident[] Incidents;
 
@@ -48,7 +66,7 @@
         try
         {
             // Call your API endpoint
-            var response = await Http.PostAsJsonAsync("https://localhost:7015/api/incident", new { username = currentUser });
+            var response = await Http.PostAsJsonAsync("https://localhost:7015/api/incident/getAll", new { username = currentUser });
 
             if (response.IsSuccessStatusCode)
             {
@@ -57,6 +75,8 @@
                 IIncident[] incidents = await response.Content.ReadFromJsonAsync<IIncident[]>();
 
                 this.Incidents = incidents;
+                this.isLoading = false;
+                StateHasChanged();
             }
             else
             {
