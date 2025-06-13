@@ -28,12 +28,12 @@
             />
 
             <Label 
-                Text="Wilt u de Status bijhouden van het door u gemelde Incident? Registreer u dan eerst, voordat u een Incident meldt!"
+                Text="Wilt u de Status bijhouden van de Incidenten die u meldt? Registreer u dan eerst, voordat u een Incident meldt!"
             />
 
             <Button
                 x:Name="NavigateToRegisterPageBtn"
-                Text="Ga naar registeer een account"
+                Text="Registreer een account"
                 Clicked="NavigateToRegisterPage"
                 HorizontalOptions="Fill"
             />

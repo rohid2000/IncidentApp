@@ -2,11 +2,29 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IncidentApp.UserReportedIncidentsPage"
-             Title="UserReportedIncidentsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             Title="My Reported Incidents">
+    <VerticalStackLayout Spacing="10">
+        <CollectionView ItemsSource="{Binding Incidents}">
+            <CollectionView.Header>
+                <!-- Table Header -->
+                <Grid ColumnDefinitions="*,*,*,*,*" Padding="10" BackgroundColor="LightGray">
+                    <Label Text="Description" FontAttributes="Bold" TextColor="Black"/>
+                    <Label Text="Status" Grid.Column="1" FontAttributes="Bold" TextColor="Black"/>
+                    <Label Text="Priority" Grid.Column="2" FontAttributes="Bold" TextColor="Black"/>
+                    <Label Text="Location" Grid.Column="3" FontAttributes="Bold" TextColor="Black"/>
+                </Grid>
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <!-- Table Row -->
+                    <Grid ColumnDefinitions="*,*,*,*,*" Padding="10">
+                        <Label Text="{Binding Description}"/>
+                        <Label Text="{Binding Status}" Grid.Column="1"/>
+                        <Label Text="{Binding Priority}" Grid.Column="2"/>
+                        <Label Text="{Binding Location}" Grid.Column="3"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </VerticalStackLayout>
 </ContentPage>
