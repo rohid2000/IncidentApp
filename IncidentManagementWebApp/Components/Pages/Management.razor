@@ -4,16 +4,21 @@
 @inject HttpClient Http
 @inject UserStateService UserStateService
 
-@if (Incidents.Length > 0)
+@if (Incidents.Count > 0)
 {
+    <select @onchange="(e) => SetSortOption(e)">
+        <option value=""></option>
+        <option value="Prioriteit">Prioriteit hoog</option>
+        <option value="Status">Status Gemeld</option>
+    </select>
     <table>
         <thead>
             <tr>
-                <th>Description</th>
+                <th>Beschrijving</th>
                 <th>Status</th>
                 <th>Priority</th>
-                <th>Username</th>
-                <th>Location</th>
+                <th>Gebruikersnaam</th>
+                <th>Locatie</th>
             </tr>
         </thead>
         <tbody>
@@ -26,23 +31,23 @@
                         <td>
                             <select value="@incident.Status" @onchange="(e) => UpdateIncidentStatus(e, incident)">
                                 <option value=""></option>
-                                <option value="registered">Geregistreerd</option>
-                                <option value="pending">In behandeling</option>
-                                <option value="completed">Afgehandeld</option>
+                                <option value="Geregistreerd">Geregistreerd</option>
+                                <option value="In behandeling">In behandeling</option>
+                                <option value="Afgehandeld">Afgehandeld</option>
                             </select>
                         </td>
                         <td>
                             <select value="@incident.Priority" @onchange="(e) => UpdateIncidentPriority(e, incident)">
                                 <option value=""></option>
-                                <option value="High">Hoog</option>
-                                <option value="Normal">Normaal</option>
-                                <option value="Low">Laag</option>
+                                <option value="Hoog">Hoog</option>
+                                <option value="Normaal">Normaal</option>
+                                <option value="Laag">Laag</option>
                             </select>
                         </td>
                         <td>@incident.Username</td>
                         <td>@incident.Location</td>
                         <td>
-                            <button @onclick="() => DeleteIncident(incident)">Delete</button>
+                            <button @onclick="() => DeleteIncident(incident)">Verwijderen</button>
                         </td>
                     </tr>
                 }
@@ -52,13 +57,13 @@
 }
 else
 {
-    <h4>There are no reported Incidents!</h4>
+    <h4>Er zijn geen gemelde incidenten!</h4>
 }
 
 @code {
     bool isLoading = true;
     string currentUser;
-    IIncident[] Incidents = [];
+    List<IIncident> Incidents = new List<IIncident>();
     PatchIncidentBody[] PatchIncidentBody;
 
     protected override async Task OnInitializedAsync()
@@ -68,6 +73,30 @@ else
         await GetAllReportedIncidents();
 
         await base.OnInitializedAsync();
+    }
+
+    private async Task SetSortOption(ChangeEventArgs args) {
+        switch(args.Value) {
+            case "Prioriteit":
+                await this.SortIncidentsByPriority();
+                break;
+            case "Status":
+                await this.SortIncidentsByStatus();
+                break;
+            default:
+                await this.GetAllReportedIncidents();
+                break;
+        }
+    }
+
+    //toDo: make priority and status an enum,
+
+    private async Task SortIncidentsByPriority() {
+        Incidents = Incidents.OrderByDescending(i => i.Priority).ToList();
+    }
+
+    private async Task SortIncidentsByStatus() {
+        Incidents = Incidents.OrderByDescending(i => i.Status).ToList();
     }
 
     private async Task GetAllReportedIncidents()
@@ -83,7 +112,8 @@ else
 
                 IIncident[] incidents = await response.Content.ReadFromJsonAsync<IIncident[]>();
 
-                this.Incidents = incidents;
+                this.Incidents.Clear();
+                this.Incidents = incidents.ToList();
                 this.isLoading = false;
                 StateHasChanged();
             }

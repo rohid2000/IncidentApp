@@ -32,7 +32,7 @@ namespace IncidentApp.Services
             return result;
         }
 
-        public static async Task<List<IncidentDataModel>> GetIncidentByUserId(int userId)
+        public static async Task<List<IncidentDataModel>> GetIncidentsByUserId(int userId)
         {
             var response = await _httpClient.GetAsync("api/Incident/" + userId);
 

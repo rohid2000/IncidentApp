@@ -2,9 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IncidentApp.UserReportedIncidentsPage"
-             Title="My Reported Incidents">
+             Title="De door mij gemelde Incidenten">
+
     <VerticalStackLayout Spacing="10">
-        <CollectionView ItemsSource="{Binding Incidents}">
+        <CollectionView x:Name="incidents" SelectionMode="Single" ItemsSource="{Binding Incidents}">
             <CollectionView.Header>
                 <!-- Table Header -->
                 <Grid ColumnDefinitions="*,*,*,*,*" Padding="10" BackgroundColor="LightGray">
@@ -26,5 +27,19 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+        <VerticalStackLayout Spacing="5">
+            <Label Text="Meldt een nieuw Incident:" FontAttributes="Bold"/>
+            <Entry x:Name="DescriptionEntry" 
+               Placeholder="Voer de beschrijving van het Incident in"
+               Text=""/>   
+        </VerticalStackLayout>
+
+        <Button
+            x:Name="ReportIncidentBtn"
+            Text="Incident melden"
+            Clicked="AddReportedIncident"
+            HorizontalOptions="Fill"
+        />
     </VerticalStackLayout>
 </ContentPage>

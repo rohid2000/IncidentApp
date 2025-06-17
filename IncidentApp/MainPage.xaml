@@ -12,7 +12,6 @@
                 Style="{StaticResource Headline}"
                 SemanticProperties.HeadingLevel="Level1" />
 
-            <!-- Description Field -->
             <VerticalStackLayout Spacing="5">
                 <Label Text="Incident:" FontAttributes="Bold"/>
                 <Entry x:Name="DescriptionEntry" 

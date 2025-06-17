@@ -11,9 +11,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddHttpClient();
-
 builder.Services.AddScoped<UserStateService>();
-
 
 var app = builder.Build();
 
