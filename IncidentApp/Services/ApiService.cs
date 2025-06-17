@@ -43,6 +43,17 @@ namespace IncidentApp.Services
             }
         }
 
+        public static async Task UpdateIncidentProperties(IncidentDataModel incident)
+        {
+            var response = await _httpClient.PatchAsJsonAsync("/api/Incident", incident);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new Exception($"API Error: {response.StatusCode} - {errorContent}");
+            }
+        }
+
         public static async Task RemoveIncidentAsync(IncidentDataModel incident)
         {
             var response = await _httpClient.DeleteAsync($"/api/Incident/{incident.Id}");
