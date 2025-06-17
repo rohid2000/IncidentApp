@@ -32,6 +32,21 @@ namespace IncidentApp.Services
             return result;
         }
 
+        public static async Task<List<IncidentDataModel>> GetIncidentByUserId(int userId)
+        {
+            var response = await _httpClient.GetAsync("api/Incident/" + userId);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new Exception($"API Error: {response.StatusCode} - {errorContent}");
+            }
+
+            var result = await response.Content.ReadFromJsonAsync<List<IncidentDataModel>>();
+
+            return result;
+        }
+
         public static async Task AddIncidentAsync(IncidentDataModel incident)
         {
             var response = await _httpClient.PostAsJsonAsync("/api/Incident", incident);

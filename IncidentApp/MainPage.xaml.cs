@@ -20,7 +20,8 @@ namespace IncidentApp
             var incident = new IncidentDataModel
             {
                 Description = DescriptionEntry.Text,
-                Location = $"{location.Latitude} {location.Longitude}"
+                Location = $"{location.Latitude} {location.Longitude}",
+                UserId = UserStateService.user?.Id ?? null
             };
 
             try

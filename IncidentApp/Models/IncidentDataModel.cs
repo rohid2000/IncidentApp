@@ -12,7 +12,7 @@ namespace IncidentApp.Models
         public required string Description { get; set; }
         public string Status { get; set; } = "Gemeld";
         public string? Priority { get; set; } = null;
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public string Location { get; set; }
     }
 }

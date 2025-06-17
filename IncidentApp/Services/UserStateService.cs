@@ -9,6 +9,6 @@ namespace IncidentApp.Services
 {
     public static class UserStateService
     {
-        public static UserDataModel user { get; set; }
+        public static UserDataModel? user { get; set; }
     }
 }
