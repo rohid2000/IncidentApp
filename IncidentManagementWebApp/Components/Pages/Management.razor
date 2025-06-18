@@ -29,6 +29,7 @@
                     <tr>
                         <td>@incident.Description</td>
                         <td>
+                            @* //toDo: Add if to each option that checks if it's the current value then it fills the required value' *@
                             <select value="@incident.Status" @onchange="(e) => UpdateIncidentStatus(e, incident)">
                                 <option value=""></option>
                                 <option value="Geregistreerd">Geregistreerd</option>
