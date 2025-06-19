@@ -9,10 +9,11 @@
             <CollectionView.Header>
                 <!-- Table Header -->
                 <Grid ColumnDefinitions="*,*,*,*,*" Padding="10" BackgroundColor="LightGray">
-                    <Label Text="Description" FontAttributes="Bold" TextColor="Black"/>
+                    <Label Text="Beschriijving" FontAttributes="Bold" TextColor="Black"/>
                     <Label Text="Status" Grid.Column="1" FontAttributes="Bold" TextColor="Black"/>
-                    <Label Text="Priority" Grid.Column="2" FontAttributes="Bold" TextColor="Black"/>
-                    <Label Text="Location" Grid.Column="3" FontAttributes="Bold" TextColor="Black"/>
+                    <Label Text="Prioriteit" Grid.Column="2" FontAttributes="Bold" TextColor="Black"/>
+                    <Label Text="Melddatum" Grid.Column="3" FontAttributes="Bold" TextColor="Black"/>
+                    <Label Text="Locatie" Grid.Column="4" FontAttributes="Bold" TextColor="Black"/>
                 </Grid>
             </CollectionView.Header>
             <CollectionView.ItemTemplate>
@@ -22,7 +23,8 @@
                         <Label Text="{Binding Description}"/>
                         <Label Text="{Binding Status}" Grid.Column="1"/>
                         <Label Text="{Binding Priority}" Grid.Column="2"/>
-                        <Label Text="{Binding Location}" Grid.Column="3"/>
+                        <Label Text="{Binding ReportDate}" Grid.Column="3"/>
+                        <Label Text="{Binding Location}" Grid.Column="4"/>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

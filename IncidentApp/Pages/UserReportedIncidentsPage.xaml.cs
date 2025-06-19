@@ -44,6 +44,7 @@ public partial class UserReportedIncidentsPage : ContentPage
             var incident = new IncidentDataModel
             {
                 Description = DescriptionEntry.Text,
+                Status = "Gemeld",
                 Location = $"{location.Latitude} {location.Longitude}",
                 UserId = UserStateService.user?.Id ?? null
             };

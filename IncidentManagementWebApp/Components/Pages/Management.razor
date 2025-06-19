@@ -1,4 +1,6 @@
 ﻿@page "/management"
+@using IncidentManagementWebApp.Enums
+@using IncidentManagementWebApp.IncidentPropertyComparers
 @using IncidentManagementWebApp.Interfaces
 @using IncidentManagementWebApp.Services
 @inject HttpClient Http
@@ -6,11 +8,14 @@
 
 @if (Incidents.Count > 0)
 {
-    <select @onchange="(e) => SetSortOption(e)">
-        <option value=""></option>
-        <option value="Prioriteit">Prioriteit hoog</option>
-        <option value="Status">Status Gemeld</option>
-    </select>
+    <div>
+        Sorteer op
+        <select @onchange="(e) => SetSortOption(e)">
+            <option value=""></option>
+            <option value="Prioriteit">Prioriteit Hoog</option>
+            <option value="Status">Status Gemeld</option>
+        </select>
+    </div>
     <table>
         <thead>
             <tr>
@@ -18,6 +23,7 @@
                 <th>Status</th>
                 <th>Priority</th>
                 <th>Gebruikersnaam</th>
+                <th>melddatum</th>
                 <th>Locatie</th>
             </tr>
         </thead>
@@ -29,23 +35,80 @@
                     <tr>
                         <td>@incident.Description</td>
                         <td>
-                            @* //toDo: Add if to each option that checks if it's the current value then it fills the required value' *@
                             <select value="@incident.Status" @onchange="(e) => UpdateIncidentStatus(e, incident)">
-                                <option value=""></option>
-                                <option value="Geregistreerd">Geregistreerd</option>
-                                <option value="In behandeling">In behandeling</option>
-                                <option value="Afgehandeld">Afgehandeld</option>
+                                @if (incident.Status == "Gemeld")
+                                {
+                                    <option selected value="Gemeld">Gemeld</option>
+
+                                }
+                                else
+                                {
+                                    <option value="Geregistreerd">Geregistreerd</option>
+                                }
+                                @if (incident.Status == "Geregistreerd")
+                                {
+                                    <option selected value="Geregistreerd">Geregistreerd</option>
+
+                                }
+                                else
+                                {
+                                    <option value="Geregistreerd">Geregistreerd</option>
+                                }
+                                @if (incident.Status == "In behandeling")
+                                {
+                                    <option selected value="In behandeling">In behandeling</option>
+
+                                }
+                                else
+                                {
+                                    <option value="In behandeling">In behandeling</option>
+                                }
+                                @if (incident.Status == "Afgehandeld")
+                                {
+                                    <option selected value="Afgehandeld">Afgehandeld</option>
+
+                                }
+                                else
+                                {
+                                    <option value="Afgehandeld">Afgehandeld</option>
+                                }
                             </select>
                         </td>
                         <td>
                             <select value="@incident.Priority" @onchange="(e) => UpdateIncidentPriority(e, incident)">
-                                <option value=""></option>
-                                <option value="Hoog">Hoog</option>
-                                <option value="Normaal">Normaal</option>
-                                <option value="Laag">Laag</option>
+                                @if (incident.Priority == null)
+                                {
+                                    <option value=""></option>
+                                    
+                                }
+                                @if (incident.Priority == "Hoog")
+                                {
+                                    <option selected value="Hoog">Hoog</option>
+                                }
+                                else
+                                {
+                                    <option value="Hoog">Hoog</option>
+                                }
+                                @if (incident.Priority == "Normaal")
+                                {
+                                    <option selected value="Normaal">Normaal</option>
+                                }
+                                else
+                                {
+                                    <option value="Normaal">Normaal</option>
+                                }
+                                @if (incident.Priority == "Laag")
+                                {
+                                    <option selected value="Laag">Laag</option>
+                                }
+                                else
+                                {
+                                    <option value="Laag">Laag</option>
+                                }
                             </select>
                         </td>
                         <td>@incident.Username</td>
+                        <td>@incident.ReportDate</td>
                         <td>@incident.Location</td>
                         <td>
                             <button @onclick="() => DeleteIncident(incident)">Verwijderen</button>
@@ -90,27 +153,26 @@ else
         }
     }
 
-    //toDo: make priority and status an enum,
 
-    private async Task SortIncidentsByPriority() {
-        Incidents = Incidents.OrderByDescending(i => i.Priority).ToList();
+
+    private async Task SortIncidentsByPriority() 
+    {
+        Incidents = Incidents.Order(new IncidentPriorityComparer()).ToList();
     }
 
-    private async Task SortIncidentsByStatus() {
-        Incidents = Incidents.OrderByDescending(i => i.Status).ToList();
+    private async Task SortIncidentsByStatus()
+    {
+        Incidents = Incidents.Order(new IncidentStatusComparer()).ToList();
     }
 
     private async Task GetAllReportedIncidents()
     {
         try
         {
-            // Call your API endpoint
             var response = await Http.PostAsJsonAsync("https://localhost:7015/api/incident/getAll", new { username = currentUser });
 
             if (response.IsSuccessStatusCode)
             {
-                // Handle successful login (e.g., store token, redirect)
-
                 IIncident[] incidents = await response.Content.ReadFromJsonAsync<IIncident[]>();
 
                 this.Incidents.Clear();
@@ -135,7 +197,7 @@ else
         {
             var body = new PatchIncidentBody
             {
-                Status = args.Value.ToString(),
+                Status = args.Value as string,
                 Priority = incident.Priority
             };
 
@@ -159,7 +221,7 @@ else
             var body = new PatchIncidentBody
                 {
                     Status = incident.Status,
-                    Priority = args.Value.ToString()
+                    Priority = args.Value as string
                 };
 
             var response = await Http.PatchAsJsonAsync("https://localhost:7015/api/incident/" + incident.Id, body);
@@ -192,3 +254,5 @@ else
         }
     }
 }
+
+            
