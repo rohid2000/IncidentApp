@@ -43,7 +43,7 @@
             
             <Button
                 x:Name="NavigateToLoginPageBtn"
-                Text="Login"
+                Text="Inloggen"
                 Clicked="NavigateToLoginPage"
                 HorizontalOptions="Fill"
             />

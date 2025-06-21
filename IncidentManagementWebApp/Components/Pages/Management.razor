@@ -8,6 +8,7 @@
 
 @if (Incidents.Count > 0)
 {
+    <h3>Gemelde incidenten</h3>
     <div>
         Sorteer op
         <select @onchange="(e) => SetSortOption(e)">
@@ -16,14 +17,14 @@
             <option value="Status">Status Gemeld</option>
         </select>
     </div>
-    <table>
+    <table class="styled-table">
         <thead>
             <tr>
                 <th>Beschrijving</th>
                 <th>Status</th>
                 <th>Priority</th>
-                <th>Gebruikersnaam</th>
-                <th>melddatum</th>
+                <th>Melder</th>
+                <th>Melddatum</th>
                 <th>Locatie</th>
             </tr>
         </thead>
@@ -124,6 +125,29 @@ else
     <h4>Er zijn geen gemelde incidenten!</h4>
 }
 
+<style>
+    .styled-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .styled-table th,
+    .styled-table td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .styled-table th {
+        background-color: #f2f2f2;
+    }
+
+    .styled-table tr:hover {
+        background-color: #f5f5f5;
+    }
+</style>
+
 @code {
     bool isLoading = true;
     string currentUser;
@@ -152,8 +176,6 @@ else
                 break;
         }
     }
-
-
 
     private async Task SortIncidentsByPriority() 
     {

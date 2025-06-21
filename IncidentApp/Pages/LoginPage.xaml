@@ -9,17 +9,15 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
-        <!-- Username Field -->
         <VerticalStackLayout Spacing="5">
-            <Label Text="Username:" FontAttributes="Bold"/>
+            <Label Text="Gebruikersnaam:" FontAttributes="Bold"/>
             <Entry x:Name="UsernameEntry" 
         Placeholder="Voer uw gebruikersnaam in"
         Text="{Binding Username}"/>
         </VerticalStackLayout>
 
-        <!-- Password Field -->
         <VerticalStackLayout Spacing="5">
-            <Label Text="Password:" FontAttributes="Bold"/>
+            <Label Text="Wachtwoord:" FontAttributes="Bold"/>
             <Entry IsPassword="True" x:Name="PasswordEntry" 
         Placeholder="Voer uw wachtwoord in"
         Text="{Binding Username}"/>
@@ -27,7 +25,7 @@
 
         <Button
             x:Name="AddUserBtn"
-            Text="Login"
+            Text="Inloggen"
             Clicked="Login"
             HorizontalOptions="Fill"
         />

@@ -55,7 +55,7 @@ public partial class UserReportedIncidentsPage : ContentPage
 
                 DescriptionEntry.Text = string.Empty;
 
-                await DisplayAlert("Success", "Incident saved!", "OK");
+                await DisplayAlert("Success", "Incident reported!", "OK");
 
                 this.FillReportedIncidentsByUser();
             }
