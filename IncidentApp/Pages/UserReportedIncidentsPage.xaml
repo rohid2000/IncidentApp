@@ -9,7 +9,7 @@
             <CollectionView.Header>
                 <!-- Table Header -->
                 <Grid ColumnDefinitions="*,*,*,*,*" Padding="10" BackgroundColor="LightGray">
-                    <Label Text="Beschriijving" FontAttributes="Bold" TextColor="Black"/>
+                    <Label Text="Beschrijving" FontAttributes="Bold" TextColor="Black"/>
                     <Label Text="Status" Grid.Column="1" FontAttributes="Bold" TextColor="Black"/>
                     <Label Text="Prioriteit" Grid.Column="2" FontAttributes="Bold" TextColor="Black"/>
                     <Label Text="Melddatum" Grid.Column="3" FontAttributes="Bold" TextColor="Black"/>
