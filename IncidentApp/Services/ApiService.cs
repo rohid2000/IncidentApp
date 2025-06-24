@@ -14,6 +14,12 @@ namespace IncidentApp.Services
 
         static ApiService()
         {
+            #if ANDROID
+                _httpClient = new HttpClient(new Xamarin.Android.Net.AndroidMessageHandler());
+            #else
+                _httpClient = new HttpClient();
+            #endif
+
             _httpClient.BaseAddress = new Uri("https://localhost:7015");
         }
 
