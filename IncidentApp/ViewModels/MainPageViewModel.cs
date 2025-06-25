@@ -10,9 +10,9 @@ namespace IncidentApp.ViewModels
 
         public MainPageViewModel()
         {
-            AddReportedIncidentCommand = new Command(async()->await AddReportedIncident());
-            NavigateToRegisterPageCommand = new Command(async()->await NavigateToRegisterPage());
-            NavigateToLoginPageCommand = new Command(async()->await NavigateToLoginPage());
+            AddReportedIncidentCommand = new Command(async() => await AddReportedIncident());
+            NavigateToRegisterPageCommand = new Command(async() => await NavigateToRegisterPage());
+            NavigateToLoginPageCommand = new Command(async() => await NavigateToLoginPage());
         }
 
         public string Description
@@ -42,11 +42,11 @@ namespace IncidentApp.ViewModels
 
                 Description = string.Empty;
 
-                ShowMessage();
+                NavigationService.ShowAlert("Success", "Incident added!", "No");
             }
             catch (Exception ex)
             {
-                ShowAlert();
+                NavigationService.ShowAlert("Failed", $"{ex.Message}", "Yes");
             }
         }
 
