@@ -20,7 +20,7 @@
             <Label Text="Wachtwoord:" FontAttributes="Bold"/>
             <Entry IsPassword="True" x:Name="PasswordEntry" 
         Placeholder="Voer uw wachtwoord in"
-        Text="{Binding Username}"/>
+        Text="{Binding Password}"/>
         </VerticalStackLayout>
 
         <Button
