@@ -13,6 +13,8 @@ namespace IncidentApp.ViewModels
         private string _username;
         private string _password;
 
+        public Command AddUserAsyncCommand { get; }
+
         public RegisterPageViewModel()
         {
             AddUserAsyncCommand = new Command(async() => await AddUserAsync());
@@ -29,8 +31,6 @@ namespace IncidentApp.ViewModels
             get => _password;
             set => SetProperty(ref _password, value);
         }
-
-        public Command AddUserAsyncCommand { get; }
 
         private async Task AddUserAsync()
         {

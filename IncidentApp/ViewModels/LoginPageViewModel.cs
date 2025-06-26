@@ -12,6 +12,9 @@ namespace IncidentApp.ViewModels
     {
         public string _username;
         public string _password;
+
+        public Command LoginCommand { get; }
+
         public LoginPageViewModel()
         {
             LoginCommand = new Command(async () => await Login());
@@ -28,8 +31,6 @@ namespace IncidentApp.ViewModels
             get => _password;
             set => SetProperty(ref _password, value);
         }
-
-        public Command LoginCommand { get; }
 
         private async Task Login()
         {

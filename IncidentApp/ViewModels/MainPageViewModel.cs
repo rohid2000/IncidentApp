@@ -8,6 +8,10 @@ namespace IncidentApp.ViewModels
     {
         private string _description;
 
+        public Command AddReportedIncidentCommand { get; }
+        public Command NavigateToRegisterPageCommand { get; }
+        public Command NavigateToLoginPageCommand { get; }
+
         public MainPageViewModel()
         {
             AddReportedIncidentCommand = new Command(async() => await AddReportedIncident());
@@ -20,10 +24,6 @@ namespace IncidentApp.ViewModels
             get => _description;
             set => SetProperty(ref _description, value);
         }
-
-        public Command AddReportedIncidentCommand { get; }
-        public Command NavigateToRegisterPageCommand { get; }
-        public Command NavigateToLoginPageCommand { get; }
 
         private async Task AddReportedIncident()
         {
