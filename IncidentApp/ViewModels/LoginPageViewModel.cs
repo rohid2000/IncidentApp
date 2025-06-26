@@ -8,14 +8,13 @@ using System.Threading.Tasks;
 
 namespace IncidentApp.ViewModels
 {
-    public class RegisterPageViewModel : BaseViewModel
+    public class LoginPageViewModel : BaseViewModel
     {
-        private string _username;
-        private string _password;
-
-        public RegisterPageViewModel()
+        public string _username;
+        public string _password;
+        public LoginPageViewModel()
         {
-            AddUserAsyncCommand = new Command(async() => await AddUserAsync());
+            LoginCommand = new Command(async () => await Login());
         }
 
         public string Username
@@ -30,30 +29,28 @@ namespace IncidentApp.ViewModels
             set => SetProperty(ref _password, value);
         }
 
-        public Command AddUserAsyncCommand { get; }
+        public Command LoginCommand { get; }
 
-        private async Task AddUserAsync()
+        private async Task Login()
         {
             var user = new UserAdminDataModel
-            {
+            { 
                 Username = _username,
                 Password = _password
             };
 
             try
             {
-                await ApiService.AddUserAsync(user);
+                var response = ApiService.TryAuthenticate(user);
 
-                Username = string.Empty;
-                Password = string.Empty;
+                await DisplayAlertService.ShowAlert("Sucess", "User logged in!", "No");
+                UserStateService.user = await response;
 
-                await DisplayAlertService.ShowAlert("Sucess", "User added!", "No");
-
-                await NavigationService.PushAsync<LoginPage>();
+                await NavigationService.PushAsync<UserReportedIncidentsPage>();
             }
             catch (Exception ex)
             {
-                await DisplayAlertService.ShowAlert("Failed", "User could not be added!", "Yes");
+                await DisplayAlertService.ShowAlert("Error", $"Failed to login: {ex.Message}", "Yes");
             }
         }
     }

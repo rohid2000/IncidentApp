@@ -10,7 +10,8 @@ namespace IncidentApp.Services
     {
         public static async Task PushAsync<T>() where T : Page
         {
-            await Shell.Current.Navigation.PushAsync(Activator.CreateInstance<T>());
+            var page = App.Current.MainPage.Handler.MauiContext.Services.GetService<T>();
+            await Shell.Current.Navigation.PushAsync(page);
         }
     }
 }

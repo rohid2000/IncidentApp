@@ -16,7 +16,8 @@
             <Label
                 Text="Meld het Incident dat u heeft gezien!"
                 Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
+                SemanticProperties.HeadingLevel="Level1" 
+            />
 
             <VerticalStackLayout Spacing="5">
                 <Label Text="Incident:" FontAttributes="Bold"/>
