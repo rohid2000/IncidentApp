@@ -2,12 +2,17 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IncidentApp.UserReportedIncidentsPage"
-             Title="De door mij gemelde Incidenten">
+             xmlns:local="clr-namespace:IncidentApp.ViewModels"
+             xmlns:models="clr-namespace:IncidentApp.Models"
+             Title="De door mij gemelde Incidenten"
+             x:DataType="local:UserReportedIncidentPageViewModel">
+    <ContentPage.BindingContext>
+        <local:UserReportedIncidentPageViewModel />
+    </ContentPage.BindingContext>
 
     <VerticalStackLayout Spacing="10">
         <CollectionView x:Name="incidents" SelectionMode="Single" ItemsSource="{Binding Incidents}">
             <CollectionView.Header>
-                <!-- Table Header -->
                 <Grid ColumnDefinitions="*,*,*,*,*" Padding="10" BackgroundColor="LightGray">
                     <Label Text="Beschrijving" FontAttributes="Bold" TextColor="Black"/>
                     <Label Text="Status" Grid.Column="1" FontAttributes="Bold" TextColor="Black"/>
@@ -17,14 +22,13 @@
                 </Grid>
             </CollectionView.Header>
             <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <!-- Table Row -->
+                <DataTemplate x:DataType="models:IncidentDataModel">
                     <Grid ColumnDefinitions="*,*,*,*,*" Padding="10">
                         <Label Text="{Binding Description}"/>
                         <Label Text="{Binding Status}" Grid.Column="1"/>
                         <Label Text="{Binding Priority}" Grid.Column="2"/>
                         <Label Text="{Binding ReportDate}" Grid.Column="3"/>
-                        <Label Text="{Binding Location}" Grid.Column="4"/>
+                        <Label Text="{Binding Location}" Grid.Column="4"/> 
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
@@ -34,13 +38,13 @@
             <Label Text="Meldt een nieuw Incident:" FontAttributes="Bold"/>
             <Entry x:Name="DescriptionEntry" 
                Placeholder="Voer de beschrijving van het Incident in"
-               Text=""/>   
+               Text="{Binding Description, Mode=TwoWay}"/>   
         </VerticalStackLayout>
 
         <Button
             x:Name="ReportIncidentBtn"
             Text="Incident melden"
-            Clicked="AddReportedIncident"
+            Command="{Binding AddIncidentAsyncCommand}"
             HorizontalOptions="Fill"
         />
     </VerticalStackLayout>

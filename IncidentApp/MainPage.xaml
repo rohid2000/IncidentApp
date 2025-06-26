@@ -1,7 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IncidentApp.MainPage">
+             xmlns:local="clr-namespace:IncidentApp.ViewModels"
+             x:Class="IncidentApp.MainPage"
+             Title="Homepagina"
+             x:DataType="local:MainPageViewModel">
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel />
+    </ContentPage.BindingContext>
 
     <ScrollView>
         <VerticalStackLayout
@@ -10,19 +16,20 @@
             <Label
                 Text="Meld het Incident dat u heeft gezien!"
                 Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
+                SemanticProperties.HeadingLevel="Level1" 
+            />
 
             <VerticalStackLayout Spacing="5">
                 <Label Text="Incident:" FontAttributes="Bold"/>
                 <Entry x:Name="DescriptionEntry" 
                    Placeholder="Voer de beschrijving van het Incident in"
-                   Text="{Binding Description}"/>   
+                   Text="{Binding Description, Mode=TwoWay}"/>
             </VerticalStackLayout>
 
             <Button
                 x:Name="ReportIncidentBtn"
                 Text="Incident melden"
-                Clicked="AddReportedIncident"
+                Command="{Binding AddReportedIncidentCommand}"
                 HorizontalOptions="Fill"
             />
 
@@ -33,21 +40,21 @@
             <Button
                 x:Name="NavigateToRegisterPageBtn"
                 Text="Registreer een account"
-                Clicked="NavigateToRegisterPage"
                 HorizontalOptions="Fill"
+                Command="{Binding NavigateToRegisterPageCommand}"
             />
 
             <Label 
                 Text="Heeft u al een account?"
             />
-            
+
             <Button
                 x:Name="NavigateToLoginPageBtn"
                 Text="Inloggen"
-                Clicked="NavigateToLoginPage"
                 HorizontalOptions="Fill"
+                Command="{Binding NavigateToLoginPageCommand}"
             />
-            
+
         </VerticalStackLayout>
     </ScrollView>
 
