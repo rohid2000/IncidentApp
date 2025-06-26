@@ -2,7 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IncidentApp.RegisterPage"
-             Title="RegisterPage">
+             Title="Register Page"
+             x:DataType="local:RegisterPageViewModel">
+    <ContentPage.BindingContext>
+        <local:RegisterPageViewModel />
+    </ContentPage.BindingContext>
+    
     <VerticalStackLayout>
         <Label 
             Text="Registreer een account, zodat u door u gemelde Incidenten kan inzien!"
@@ -12,21 +17,21 @@
         <VerticalStackLayout Spacing="5">
             <Label Text="Gebruikersnaam:" FontAttributes="Bold"/>
             <Entry x:Name="UsernameEntry" 
-        Placeholder="Voer uw gebruikersnaam in"
-        Text="{Binding Username}"/>
+                Placeholder="Voer uw gebruikersnaam in"
+                Text="{Binding Username}"/>
         </VerticalStackLayout>
 
         <VerticalStackLayout Spacing="5">
             <Label Text="Wachtwoord:" FontAttributes="Bold"/>
             <Entry IsPassword="True" x:Name="PasswordEntry" 
-        Placeholder="Voer uw wachtwoord in"
-        Text="{Binding Password}"/>
+                Placeholder="Voer uw wachtwoord in"
+                Text="{Binding Password}"/>
         </VerticalStackLayout>
 
         <Button
             x:Name="AddUserBtn"
             Text="Registreren"
-            Clicked="AddUser"
+            Command="{Binding AddUserAsyncCommand}"
             HorizontalOptions="Fill"
 />
     </VerticalStackLayout>

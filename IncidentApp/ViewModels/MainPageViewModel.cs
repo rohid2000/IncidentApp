@@ -42,11 +42,11 @@ namespace IncidentApp.ViewModels
 
                 Description = string.Empty;
 
-                NavigationService.ShowAlert("Success", "Incident added!", "No");
+                DisplayAlertService.ShowAlert("Success", "Incident added!", "No");
             }
             catch (Exception ex)
             {
-                NavigationService.ShowAlert("Failed", $"{ex.Message}", "Yes");
+                DisplayAlertService.ShowAlert("Failed", $"{ex.Message}", "Yes");
             }
         }
 

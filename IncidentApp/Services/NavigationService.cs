@@ -12,10 +12,5 @@ namespace IncidentApp.Services
         {
             await Shell.Current.Navigation.PushAsync(Activator.CreateInstance<T>());
         }
-
-        public static async Task ShowAlert(string title, string message, string cancel)
-        {
-            await Shell.Current.DisplayAlert(title, message, cancel);
-        }
     }
 }

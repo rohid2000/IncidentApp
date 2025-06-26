@@ -8,7 +8,6 @@ namespace IncidentApp
 {
     public partial class MainPage : ContentPage
     {
-
         public MainPage(MainPageViewModel vM)
         {
             InitializeComponent();
