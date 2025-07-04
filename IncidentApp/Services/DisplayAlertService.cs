@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IncidentApp.Services
 {
-    public class DisplayAlertService
+    public static class DisplayAlertService
     {
         public static async Task ShowAlert(string title, string message, string cancel)
         {
