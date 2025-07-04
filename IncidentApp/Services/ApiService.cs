@@ -17,7 +17,7 @@ namespace IncidentApp.Services
             _httpClient.BaseAddress = new Uri("https://localhost:7015");
         }
 
-        public async Task<List<IncidentDataModel>> GetIncidentAsync()
+        public virtual async Task<List<IncidentDataModel>> GetIncidentAsync()
         {
             var response = await _httpClient.GetAsync("api/Incident");
 
@@ -32,7 +32,7 @@ namespace IncidentApp.Services
             return result;
         }
 
-        public async Task<List<IncidentDataModel>> GetIncidentsByUserId(int userId)
+        public virtual async Task<List<IncidentDataModel>> GetIncidentsByUserId(int userId)
         {
             var response = await _httpClient.GetAsync("api/Incident/" + userId);
 
@@ -47,7 +47,7 @@ namespace IncidentApp.Services
             return result;
         }
 
-        public async Task AddIncidentAsync(IncidentDataModel incident)
+        public virtual async Task AddIncidentAsync(IncidentDataModel incident)
         {
             var response = await _httpClient.PostAsJsonAsync("/api/Incident", incident);
 
@@ -58,7 +58,7 @@ namespace IncidentApp.Services
             }
         }
 
-        public async Task UpdateIncidentProperties(IncidentDataModel incident)
+        public virtual async Task UpdateIncidentProperties(IncidentDataModel incident)
         {
             var response = await _httpClient.PatchAsJsonAsync("/api/Incident", incident);
 
@@ -69,7 +69,7 @@ namespace IncidentApp.Services
             }
         }
 
-        public async Task RemoveIncidentAsync(IncidentDataModel incident)
+        public virtual async Task RemoveIncidentAsync(IncidentDataModel incident)
         {
             var response = await _httpClient.DeleteAsync($"/api/Incident/{incident.Id}");
 
@@ -80,7 +80,7 @@ namespace IncidentApp.Services
             }
         }
 
-        public async Task AddUserAsync(UserAdminDataModel user)
+        public virtual async Task AddUserAsync(UserAdminDataModel user)
         {
             var response = await _httpClient.PostAsJsonAsync("/api/user", user);
 
@@ -91,7 +91,7 @@ namespace IncidentApp.Services
             }
         }
 
-        public async Task<UserDataModel> TryAuthenticate(UserAdminDataModel user)
+        public virtual async Task<UserDataModel> TryAuthenticate(UserAdminDataModel user)
         {
             var response = await _httpClient.PostAsJsonAsync("/api/login", user);
 

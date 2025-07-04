@@ -12,6 +12,7 @@ namespace IncidentApp.ViewModels
     public class UserReportedIncidentPageViewModel : BaseViewModel
     {
         private ApiService _apiService;
+        private LocationFetcher _locationFetcher;
         private DisplayAlertService _displayAlertService;
         private UserStateService _userStateService;
 
@@ -24,6 +25,7 @@ namespace IncidentApp.ViewModels
         public UserReportedIncidentPageViewModel()
         {
             _apiService = new ApiService();
+            _locationFetcher = new LocationFetcher();
             _displayAlertService = new DisplayAlertService();
             _userStateService = new UserStateService();
 
@@ -69,7 +71,7 @@ namespace IncidentApp.ViewModels
 
         private async Task AddIncidentAsync()
         {
-            Location location = await LocationFetcher.GetCurrentLocation();
+            Location location = await _locationFetcher.GetCurrentLocation();
 
             var incident = new IncidentDataModel
             {

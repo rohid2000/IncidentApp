@@ -1,8 +1,8 @@
 ﻿using Microsoft.Maui.Devices.Sensors;
 
-public static class LocationFetcher
+public class LocationFetcher
 {
-    public static async Task<Location> GetCurrentLocation()
+    public virtual async Task<Location> GetCurrentLocation()
     {
         try
         {

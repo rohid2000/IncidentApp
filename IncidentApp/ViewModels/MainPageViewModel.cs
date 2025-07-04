@@ -7,6 +7,7 @@ namespace IncidentApp.ViewModels
     public class MainPageViewModel : BaseViewModel
     {
         private ApiService _apiService;
+        private LocationFetcher _locationFetcher;
         private DisplayAlertService _displayAlertService;
         private NavigationService _navigationService;
         private UserStateService _userStateService;
@@ -20,6 +21,7 @@ namespace IncidentApp.ViewModels
         public MainPageViewModel()
         {
             _apiService = new ApiService();
+            _locationFetcher = new LocationFetcher();
             _displayAlertService = new DisplayAlertService();
             _navigationService = new NavigationService();
             _userStateService = new UserStateService();
@@ -29,17 +31,31 @@ namespace IncidentApp.ViewModels
             NavigateToLoginPageCommand = new Command(async() => await NavigateToLoginPage());
         }
 
+        public MainPageViewModel(
+            ApiService apiService,
+            LocationFetcher locationFetcher,
+            DisplayAlertService displayAlertService,
+            NavigationService navigationService,
+            UserStateService userStateService)
+        {
+            _apiService = apiService;
+            _locationFetcher = locationFetcher;
+            _displayAlertService = displayAlertService;
+            _navigationService = navigationService;
+            _userStateService = userStateService;
+        }
+
         public string Description
         {
             get => _description;
             set => SetProperty(ref _description, value);
         }
 
-        private async Task AddReportedIncident()
+        public async Task AddReportedIncident()
         {
             try
             {
-                Location location = await LocationFetcher.GetCurrentLocation();
+                Location location = await _locationFetcher.GetCurrentLocation();
 
                 var incident = new IncidentDataModel
                 {
@@ -60,12 +76,12 @@ namespace IncidentApp.ViewModels
             }
         }
 
-        private async Task NavigateToRegisterPage()
+        public async Task NavigateToRegisterPage()
         {
             await _navigationService.PushAsync<RegisterPage>();
         }
 
-        private async Task NavigateToLoginPage()
+        public async Task NavigateToLoginPage()
         {
             await _navigationService.PushAsync<LoginPage>();
         }
