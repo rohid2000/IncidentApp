@@ -10,6 +10,11 @@ namespace IncidentApp.ViewModels
 {
     public class LoginPageViewModel : BaseViewModel
     {
+        private ApiService _apiService;
+        private DisplayAlertService _displayAlertService;
+        private NavigationService _navigationService;
+        private UserStateService _userStateService;
+
         public string _username;
         public string _password;
 
@@ -17,6 +22,11 @@ namespace IncidentApp.ViewModels
 
         public LoginPageViewModel()
         {
+            _apiService = new ApiService();
+            _displayAlertService = new DisplayAlertService();
+            _navigationService = new NavigationService();
+            _userStateService = new UserStateService();
+
             LoginCommand = new Command(async () => await Login());
         }
 
@@ -42,16 +52,16 @@ namespace IncidentApp.ViewModels
 
             try
             {
-                var response = ApiService.TryAuthenticate(user);
+                var response = _apiService.TryAuthenticate(user);
 
-                await DisplayAlertService.ShowAlert("Sucess", "User logged in!", "No");
-                UserStateService.user = await response;
+                await _displayAlertService.ShowAlert("Sucess", "User logged in!", "No");
+                _userStateService.user = await response;
 
-                await NavigationService.PushAsync<UserReportedIncidentsPage>();
+                await _navigationService.PushAsync<UserReportedIncidentsPage>();
             }
             catch (Exception ex)
             {
-                await DisplayAlertService.ShowAlert("Error", $"Failed to login: {ex.Message}", "Yes");
+                await _displayAlertService.ShowAlert("Error", $"Failed to login: {ex.Message}", "Yes");
             }
         }
     }

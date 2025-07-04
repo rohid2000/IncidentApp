@@ -11,6 +11,10 @@ namespace IncidentApp.ViewModels
 {
     public class UserReportedIncidentPageViewModel : BaseViewModel
     {
+        private ApiService _apiService;
+        private DisplayAlertService _displayAlertService;
+        private UserStateService _userStateService;
+
         private List<IncidentDataModel> _incidents = [];
 
         public string _description;
@@ -19,6 +23,10 @@ namespace IncidentApp.ViewModels
 
         public UserReportedIncidentPageViewModel()
         {
+            _apiService = new ApiService();
+            _displayAlertService = new DisplayAlertService();
+            _userStateService = new UserStateService();
+
             AddIncidentAsyncCommand = new Command(async () => await AddIncidentAsync());
 
             FillReportedIncidentsByUser();
@@ -38,11 +46,11 @@ namespace IncidentApp.ViewModels
 
         protected async Task FillReportedIncidentsByUser()
         {
-            var userId = UserStateService.user.Id;
+            var userId = _userStateService.user.Id;
 
             try
             {
-                var response = await ApiService.GetIncidentsByUserId(userId);
+                var response = await _apiService.GetIncidentsByUserId(userId);
 
                 Incidents.Clear();
 
@@ -55,7 +63,7 @@ namespace IncidentApp.ViewModels
             }
             catch (Exception ex)
             {
-                DisplayAlertService.ShowAlert("Error", $"Could not fetch Incidents: {ex.Message}", "No");
+                await _displayAlertService.ShowAlert("Error", $"Could not fetch Incidents: {ex.Message}", "No");
             }
         }
 
@@ -68,22 +76,22 @@ namespace IncidentApp.ViewModels
                 Description = _description,
                 Status = "Gemeld",
                 Location = $"{location.Latitude} {location.Longitude}",
-                UserId = UserStateService.user?.Id ?? null
+                UserId = _userStateService.user?.Id ?? null
             };
 
             try
             {
-                await ApiService.AddIncidentAsync(incident);
+                await _apiService.AddIncidentAsync(incident);
 
                 Description = string.Empty;
 
-                await DisplayAlertService.ShowAlert("Success", "Incident reported!", "OK");
+                await _displayAlertService.ShowAlert("Success", "Incident reported!", "OK");
 
                 await this.FillReportedIncidentsByUser();
             }
             catch (Exception ex)
             {
-                await DisplayAlertService.ShowAlert("Error", $"Failed to save: {ex.Message}", "OK");
+                await _displayAlertService.ShowAlert("Error", $"Failed to save: {ex.Message}", "OK");
             }
         }
     }

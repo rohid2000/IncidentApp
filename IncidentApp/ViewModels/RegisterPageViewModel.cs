@@ -10,6 +10,10 @@ namespace IncidentApp.ViewModels
 {
     public class RegisterPageViewModel : BaseViewModel
     {
+        private ApiService _apiService;
+        private DisplayAlertService _displayAlertService;
+        private NavigationService _navigationService;
+
         private string _username;
         private string _password;
 
@@ -17,6 +21,10 @@ namespace IncidentApp.ViewModels
 
         public RegisterPageViewModel()
         {
+            _apiService = new ApiService();
+            _displayAlertService = new DisplayAlertService();
+            _navigationService = new NavigationService();
+
             AddUserAsyncCommand = new Command(async() => await AddUserAsync());
         }
 
@@ -42,18 +50,18 @@ namespace IncidentApp.ViewModels
 
             try
             {
-                await ApiService.AddUserAsync(user);
+                await _apiService.AddUserAsync(user);
 
                 Username = string.Empty;
                 Password = string.Empty;
 
-                await DisplayAlertService.ShowAlert("Sucess", "User added!", "No");
+                await _displayAlertService.ShowAlert("Sucess", "User added!", "No");
 
-                await NavigationService.PushAsync<LoginPage>();
+                await _navigationService.PushAsync<LoginPage>();
             }
             catch (Exception ex)
             {
-                await DisplayAlertService.ShowAlert("Failed", "User could not be added!", "Yes");
+                await _displayAlertService.ShowAlert("Failed", "User could not be added!", "Yes");
             }
         }
     }

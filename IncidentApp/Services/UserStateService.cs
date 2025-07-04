@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace IncidentApp.Services
 {
-    public static class UserStateService
+    public class UserStateService
     {
-        public static UserDataModel? user { get; set; }
+        public UserDataModel? user { get; set; }
     }
 }

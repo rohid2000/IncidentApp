@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace IncidentApp.Services
 {
-    public static class ApiService
+    public class ApiService
     {
-        private static readonly HttpClient _httpClient = new HttpClient();
+        private readonly HttpClient _httpClient = new HttpClient();
 
-        static ApiService()
+        public ApiService()
         {
             _httpClient.BaseAddress = new Uri("https://localhost:7015");
         }
 
-        public static async Task<List<IncidentDataModel>> GetIncidentAsync()
+        public async Task<List<IncidentDataModel>> GetIncidentAsync()
         {
             var response = await _httpClient.GetAsync("api/Incident");
 
@@ -32,7 +32,7 @@ namespace IncidentApp.Services
             return result;
         }
 
-        public static async Task<List<IncidentDataModel>> GetIncidentsByUserId(int userId)
+        public async Task<List<IncidentDataModel>> GetIncidentsByUserId(int userId)
         {
             var response = await _httpClient.GetAsync("api/Incident/" + userId);
 
@@ -47,7 +47,7 @@ namespace IncidentApp.Services
             return result;
         }
 
-        public static async Task AddIncidentAsync(IncidentDataModel incident)
+        public async Task AddIncidentAsync(IncidentDataModel incident)
         {
             var response = await _httpClient.PostAsJsonAsync("/api/Incident", incident);
 
@@ -58,7 +58,7 @@ namespace IncidentApp.Services
             }
         }
 
-        public static async Task UpdateIncidentProperties(IncidentDataModel incident)
+        public async Task UpdateIncidentProperties(IncidentDataModel incident)
         {
             var response = await _httpClient.PatchAsJsonAsync("/api/Incident", incident);
 
@@ -69,7 +69,7 @@ namespace IncidentApp.Services
             }
         }
 
-        public static async Task RemoveIncidentAsync(IncidentDataModel incident)
+        public async Task RemoveIncidentAsync(IncidentDataModel incident)
         {
             var response = await _httpClient.DeleteAsync($"/api/Incident/{incident.Id}");
 
@@ -80,7 +80,7 @@ namespace IncidentApp.Services
             }
         }
 
-        public static async Task AddUserAsync(UserAdminDataModel user)
+        public async Task AddUserAsync(UserAdminDataModel user)
         {
             var response = await _httpClient.PostAsJsonAsync("/api/user", user);
 
@@ -91,7 +91,7 @@ namespace IncidentApp.Services
             }
         }
 
-        public static async Task<UserDataModel> TryAuthenticate(UserAdminDataModel user)
+        public async Task<UserDataModel> TryAuthenticate(UserAdminDataModel user)
         {
             var response = await _httpClient.PostAsJsonAsync("/api/login", user);
 

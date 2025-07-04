@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace IncidentApp.Services
 {
-    public static class DisplayAlertService
+    public class DisplayAlertService
     {
-        public static async Task ShowAlert(string title, string message, string cancel)
+        public async Task ShowAlert(string title, string message, string cancel)
         {
             await Shell.Current.DisplayAlert(title, message, cancel);
         }
