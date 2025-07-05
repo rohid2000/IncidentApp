@@ -34,6 +34,19 @@ namespace IncidentApp.ViewModels
             FillReportedIncidentsByUser();
         }
 
+        public UserReportedIncidentPageViewModel(
+            ApiService apiService,
+            LocationFetcher locationFetcher,
+            DisplayAlertService displayAlertService,
+            UserStateService userStateService)
+
+        {
+            _apiService = apiService;
+            _locationFetcher = locationFetcher;
+            _displayAlertService = displayAlertService;
+            _userStateService = userStateService;
+        }
+
         public List<IncidentDataModel> Incidents
         {
             get => _incidents;
@@ -46,7 +59,7 @@ namespace IncidentApp.ViewModels
             set => SetProperty(ref _description, value);
         }
 
-        protected async Task FillReportedIncidentsByUser()
+        public async Task FillReportedIncidentsByUser()
         {
             var userId = _userStateService.user.Id;
 
@@ -69,7 +82,7 @@ namespace IncidentApp.ViewModels
             }
         }
 
-        private async Task AddIncidentAsync()
+        public async Task AddIncidentAsync()
         {
             Location location = await _locationFetcher.GetCurrentLocation();
 

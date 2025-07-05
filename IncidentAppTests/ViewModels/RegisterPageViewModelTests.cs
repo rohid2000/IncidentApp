@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Windows.Services.Maps;
 using Xunit;
 
-namespace IncidentAppTests
+namespace IncidentAppTests.ViewModelTests
 {
     public class RegisterPageViewModelTests
     {
@@ -19,6 +19,7 @@ namespace IncidentAppTests
         private readonly Mock<DisplayAlertService> _displayAlertService;
         private readonly Mock<NavigationService> _navigationService;
         private readonly RegisterPageViewModel _viewModel;
+
         public RegisterPageViewModelTests()
         {
             _apiService = new Mock<ApiService>();

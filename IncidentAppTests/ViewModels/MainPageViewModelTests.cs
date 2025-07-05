@@ -7,7 +7,7 @@ using Windows.Services.Maps;
 using Windows.System;
 using Xunit;
 
-namespace IncidentAppTests
+namespace IncidentAppTests.ViewModelTests
 {
     public class MainPageViewModelTests
     {

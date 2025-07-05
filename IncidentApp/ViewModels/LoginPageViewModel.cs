@@ -30,6 +30,20 @@ namespace IncidentApp.ViewModels
             LoginCommand = new Command(async () => await Login());
         }
 
+        public LoginPageViewModel(
+            ApiService apiService,
+            DisplayAlertService displayAlertService,
+            NavigationService navigationService,
+            UserStateService userStateService)
+
+        {
+            _apiService = apiService;
+            _displayAlertService = displayAlertService;
+            _navigationService = navigationService;
+            _userStateService = userStateService;
+        }
+            
+
         public string Username
         {
             get => _username;
@@ -42,7 +56,7 @@ namespace IncidentApp.ViewModels
             set => SetProperty(ref _password, value);
         }
 
-        private async Task Login()
+        public async Task Login()
         {
             var user = new UserAdminDataModel
             { 
