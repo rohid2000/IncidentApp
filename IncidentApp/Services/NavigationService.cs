@@ -8,7 +8,7 @@ namespace IncidentApp.Services
 {
     public class NavigationService
     {
-        public async Task PushAsync<T>() where T : Page
+        public virtual async Task PushAsync<T>() where T : Page
         {
             var page = App.Current.MainPage.Handler.MauiContext.Services.GetService<T>();
             await Shell.Current.Navigation.PushAsync(page);

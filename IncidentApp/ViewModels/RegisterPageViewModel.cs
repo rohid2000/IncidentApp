@@ -28,6 +28,16 @@ namespace IncidentApp.ViewModels
             AddUserAsyncCommand = new Command(async() => await AddUserAsync());
         }
 
+        public RegisterPageViewModel(
+            ApiService apiService,
+            DisplayAlertService displayAlertService,
+            NavigationService navigation)
+        {
+            _apiService = apiService;
+            _displayAlertService = displayAlertService;
+            _navigationService = navigation;
+        }
+
         public string Username
         {
             get => _username;
@@ -40,7 +50,7 @@ namespace IncidentApp.ViewModels
             set => SetProperty(ref _password, value);
         }
 
-        private async Task AddUserAsync()
+        public async Task AddUserAsync()
         {
             var user = new UserAdminDataModel
             {
@@ -55,7 +65,7 @@ namespace IncidentApp.ViewModels
                 Username = string.Empty;
                 Password = string.Empty;
 
-                await _displayAlertService.ShowAlert("Sucess", "User added!", "No");
+                await _displayAlertService.ShowAlert("Success", "User added!", "No");
 
                 await _navigationService.PushAsync<LoginPage>();
             }

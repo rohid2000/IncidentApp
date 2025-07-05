@@ -8,7 +8,7 @@ namespace IncidentApp.Services
 {
     public class DisplayAlertService
     {
-        public async Task ShowAlert(string title, string message, string cancel)
+        public virtual async Task ShowAlert(string title, string message, string cancel)
         {
             await Shell.Current.DisplayAlert(title, message, cancel);
         }
