@@ -38,20 +38,20 @@ namespace IncidentAppTests.ViewModelTests
                 _displayAlertService.Object,
                 _navigationService.Object)
             {
-                Username = "testuser",
+                Username = "TestUser",
                 Password = "testpass123"
             };
         }
 
         [Fact]
-        public async Task AddUserAsync_SuccessfulRegistration()
+        public async Task AddUserAsync_Returns_UserAdded()
         {
             //Act
             await _viewModel.AddUserAsync();
 
             //Assert
             _apiService.Verify(x => x.AddUserAsync(It.Is<UserAdminDataModel>(u =>
-                u.Username == "testuser" &&
+                u.Username == "TestUser" &&
                 u.Password == "testpass123"
             )), Times.Once);
 
@@ -83,7 +83,7 @@ namespace IncidentAppTests.ViewModelTests
 
             _navigationService.Verify(x => x.PushAsync<LoginPage>(), Times.Never);
 
-            Assert.Equal("testuser", _viewModel.Username);
+            Assert.Equal("TestUser", _viewModel.Username);
             Assert.Equal("testpass123", _viewModel.Password);
         }
     }

@@ -12,7 +12,7 @@ namespace IncidentAppTests.Services
     public class DisplayAlertServiceTests
     {
         [Fact]
-        public async Task ShowAlert_CallsShellCurrentDisplayAlert()
+        public async Task ShowAlert_Returns_DisplayAlert_With_Title_Message_And_Cancel_Once()
         {
             //Arrange
             var mockShell = new Mock<IShell>(MockBehavior.Strict);

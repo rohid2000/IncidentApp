@@ -28,7 +28,6 @@ namespace IncidentAppTests.ViewModelTests
             _navigationService = new Mock<NavigationService>();
             _userStateService = new Mock<UserStateService>();
 
-            // Setup default successful response
             _apiService.Setup(x => x.TryAuthenticate(It.IsAny<UserAdminDataModel>()))
                           .Returns(Task.FromResult(new UserDataModel()));
             _displayAlertService.Setup(x => x.ShowAlert(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
@@ -42,16 +41,16 @@ namespace IncidentAppTests.ViewModelTests
                 _navigationService.Object,
                 _userStateService.Object)
             {
-                Username = "testuser",
+                Username = "TestUser",
                 Password = "testpass123"
             };
         }
 
         [Fact]
-        public async Task Login_SuccessfulAuthentication()
+        public async Task Login_Succeeded_And_Sends_User_To_UserReportedIncidentsPage()
         {
             //Arrange
-            var testUser = new UserDataModel { Id = 1, Username = "testuser" };
+            var testUser = new UserDataModel { Id = 1, Username = "TestUser" };
             _apiService.Setup(x => x.TryAuthenticate(It.IsAny<UserAdminDataModel>()))
                           .Returns(Task.FromResult(testUser));
 
@@ -60,7 +59,7 @@ namespace IncidentAppTests.ViewModelTests
 
             //Assert
             _apiService.Verify(x => x.TryAuthenticate(It.Is<UserAdminDataModel>(u =>
-                u.Username == "testuser" &&
+                u.Username == "TestUser" &&
                 u.Password == "testpass123"
             )), Times.Once);
 
@@ -78,7 +77,7 @@ namespace IncidentAppTests.ViewModelTests
         }
 
         [Fact]
-        public async Task Login_FailedAuthentication_ShowsError()
+        public async Task Login_Failed_And_Returns_Error()
         {
             //Arrange
             var errorMessage = "Invalid credentials";

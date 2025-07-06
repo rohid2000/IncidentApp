@@ -27,23 +27,22 @@ namespace IncidentAppTests.ViewModelTests
             public bool CallbackInvoked { get; private set; }
             private void CallbackAction() => CallbackInvoked = true;
 
-            // Helper method to test SetProperty directly
             public bool TestSetProperty(ref int field, int value, string propertyName = null)
             {
                 return SetProperty(ref field, value, propertyName);
             }
 
         [Fact]
-        public void SetProperty_UpdatesValueAndRaisesPropertyChanged()
+        public void SetProperty_UpdatesValueAndUpdatesPropertyChanged()
         {
             //Arrange
             var vm = new BaseViewModelTests();
-            var propertyChangedRaised = false;
+            var propertyUpdated = false;
             vm.PropertyChanged += (sender, args) =>
             {
-                if (args.PropertyName == nameof(BaseViewModelTests.TestProperty))
+                if (args.PropertyName == nameof(TestProperty))
                 {
-                    propertyChangedRaised = true;
+                    propertyUpdated = true;
                 }
             };
 
@@ -52,7 +51,7 @@ namespace IncidentAppTests.ViewModelTests
 
             //Assert
             Assert.Equal("New Value", vm.TestProperty);
-            Assert.True(propertyChangedRaised);
+            Assert.True(propertyUpdated);
         }
 
         [Fact]
@@ -61,14 +60,14 @@ namespace IncidentAppTests.ViewModelTests
             //Arrange
             var vm = new BaseViewModelTests();
             vm.TestProperty = "Initial Value";
-            var propertyChangedRaised = false;
-            vm.PropertyChanged += (sender, args) => propertyChangedRaised = true;
+            var propertyUpdated = false;
+            vm.PropertyChanged += (sender, args) => propertyUpdated = true;
 
             //Act
-            vm.TestProperty = "Initial Value"; // Same value
+            vm.TestProperty = "Initial Value";
 
             //Assert
-            Assert.False(propertyChangedRaised);
+            Assert.False(propertyUpdated);
         }
 
         [Fact]
@@ -89,10 +88,10 @@ namespace IncidentAppTests.ViewModelTests
         {
             //Arrange
             var vm = new BaseViewModelTests();
-            var field = 0; // Local field to use with ref
+            var field = 0;
 
             //Act
-            var result = vm.TestSetProperty(ref field, 10, nameof(BaseViewModelTests.NumericProperty));
+            var result = vm.TestSetProperty(ref field, 10, nameof(NumericProperty));
 
             //Assert
             Assert.True(result);
@@ -103,18 +102,18 @@ namespace IncidentAppTests.ViewModelTests
         {
             //Arrange
             var vm = new BaseViewModelTests();
-            var field = 5; // Local field to use with ref
+            var field = 5; 
             var originalValue = field;
 
             //Act
-            var result = vm.TestSetProperty(ref field, originalValue, nameof(BaseViewModelTests.NumericProperty));
+            var result = vm.TestSetProperty(ref field, originalValue, nameof(NumericProperty));
 
             //Assert
             Assert.False(result);
         }
 
         [Fact]
-        public void OnPropertyChanged_RaisesEventForCallerMemberName()
+        public void OnPropertyChanged_CallsEventForCallerMemberName()
         {
             //Arrange
             var vm = new BaseViewModelTests();
@@ -125,7 +124,7 @@ namespace IncidentAppTests.ViewModelTests
             vm.TestProperty = "Trigger Change";
 
             //Assert
-            Assert.Equal(nameof(BaseViewModelTests.TestProperty), changedProperty);
+            Assert.Equal(nameof(TestProperty), changedProperty);
         }
     }
 }

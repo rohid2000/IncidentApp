@@ -37,7 +37,7 @@ namespace IncidentAppTests.ViewModelTests
         }
 
         [Fact]
-        public async Task FillReportedIncidentsByUser_SuccessfulLoad()
+        public async Task FillReportedIncidentsByUser_Success()
         {
             //Arrange
             var testIncidents = new List<IncidentDataModel>
@@ -61,7 +61,7 @@ namespace IncidentAppTests.ViewModelTests
         }
 
         [Fact]
-        public async Task FillReportedIncidentsByUser_FailedLoad_ShowsError()
+        public async Task FillReportedIncidentsByUser_Failed_ShowsError()
         {
             //Arrange
             var errorMessage = "API error";
@@ -82,13 +82,12 @@ namespace IncidentAppTests.ViewModelTests
         }
 
         [Fact]
-        public async Task AddIncidentAsync_SuccessfulReport()
+        public async Task AddIncidentAsync_Success()
         {
             //Arrange
             var testLocation = new Location(52.3676, 4.9041);
             _viewModel.Description = "Broken streetlight";
 
-            //Setup
             _mockLocationFetcher.Setup(x => x.GetCurrentLocation())
                               .ReturnsAsync(testLocation);
             _mockApiService.Setup(x => x.AddIncidentAsync(It.IsAny<IncidentDataModel>()))
@@ -119,7 +118,7 @@ namespace IncidentAppTests.ViewModelTests
         }
 
         [Fact]
-        public async Task AddIncidentAsync_FailedReport_ShowsError()
+        public async Task AddIncidentAsync_Failed_ShowsError()
         {
             //Arrange
             var testLocation = new Location(52.3676, 4.9041);
@@ -145,13 +144,12 @@ namespace IncidentAppTests.ViewModelTests
         }
 
         [Fact]
-        public async Task AddIncidentAsync_NoUser_StillReportsWithNullUserId()
+        public async Task AddIncidentAsync_NoUser_Succes_Without_LoggedInUser()
         {
             //Arrange
             var testLocation = new Location(52.3676, 4.9041);
             _viewModel.Description = "Anonymous report";
 
-            //Setup no user
             _mockUserStateService.Setup(x => x.user).Returns((UserDataModel)null);
             _mockLocationFetcher.Setup(x => x.GetCurrentLocation())
                               .ReturnsAsync(testLocation);

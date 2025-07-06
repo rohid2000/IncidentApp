@@ -42,7 +42,7 @@ namespace IncidentAppTests.ViewModelTests
         }
 
         [Fact]
-        public async Task AddReportedIncident_Successful_WithLoggedInUser()
+        public async Task AddReportedIncident_Succeeded_WithLoggedInUser()
         {
             //Arrange
             var testUser = new UserDataModel { Id = 1 };
@@ -73,7 +73,7 @@ namespace IncidentAppTests.ViewModelTests
         }
 
         [Fact]
-        public async Task AddReportedIncident_Successful_WithoutLoggedInUser()
+        public async Task AddReportedIncident_Succeeded_WithoutLoggedInUser()
         {
             //Arrange
             var testLocation = new Location(47.6062, -122.3321);
@@ -136,7 +136,7 @@ namespace IncidentAppTests.ViewModelTests
         }
 
         [Fact]
-        public async Task AddReportedIncident_DescriptionEmptyAfterSuccess()
+        public async Task AddReportedIncident_DescriptionEmptyAfterSucces()
         {
             //Arrange
             var testLocation = new Location(47.6062, -122.3321);
