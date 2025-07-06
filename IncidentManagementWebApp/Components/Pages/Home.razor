@@ -32,13 +32,10 @@
     {
         try
         {
-            // Call your API endpoint
             var response = await Http.PostAsJsonAsync("https://localhost:7015/api/login", Model);
 
             if (response.IsSuccessStatusCode)
             {
-                // Handle successful login (e.g., store token, redirect)
-
                 IUser currentUser = await response.Content.ReadFromJsonAsync<IUser>();
 
                 UserStateService.currentUser = currentUser;
